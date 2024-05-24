@@ -1,24 +1,11 @@
 import React, { useState } from 'react'
 import styles from './addTicket.module.css';
 import { Imagenes } from '../Imagenes/Imagenes';
+import { useImagenes } from '../../hooks/useImagenes';
+
+
 export const AddTicket = () => {
-
-  const [imagen, setImage] = useState(null);
-  const [imagenes, setImagenes] = useState([]);
-
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result);
-        setImagenes([...imagenes, e.target.result]);
-      };
-      reader.readAsDataURL(file);
-
-    }
-  };
-
+  const { imagenes, handleImageChange } = useImagenes()
 
 
   const handleClick = () => {
@@ -40,7 +27,7 @@ export const AddTicket = () => {
 
 
       {
-        imagenes && <Imagenes imagenes={imagenes}/>
+        imagenes && <Imagenes imagenes={imagenes} />
       }
 
 
